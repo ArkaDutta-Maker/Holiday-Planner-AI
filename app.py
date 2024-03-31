@@ -50,12 +50,9 @@ def main(location, distance, crowd, days):
         return "Error in processing the data"
 
 
-@app.route('/', methods=['POST'])
+@app.route('/recommend', methods=['POST'])
 def home():
     data = request.get_json()
     
     return main(data['location'], data['distance'], data['crowd'], data['days'])
-    
 
-# if __name__ == '__main__':
-#     app.run()
