@@ -47,7 +47,7 @@ def main(location, distance, crowd, days):
         answer = final_chain.invoke({"output": output})
         return jsonify(answer)
     except:
-        return jsonify("Error in processing the data":404)
+        return "Error in processing the data"
 
 
 @app.route('/', methods=['POST'])
