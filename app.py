@@ -37,19 +37,18 @@ def main(location, distance, crowd, days):
 
     output = chain.invoke({"location": location, "distance": distance, "crowd": crowd, "days": days})
     answer = []
-    while(True and len(answer) <= 1):
-        try:
-            output_parser = JsonOutputParser(pydantic_object=Travel)
-            output_prompt = PromptTemplate(
-                template="Think and extract as instructed in JSON format\n{format_instructions}\n{output}\n",
-                input_variables=["output"],
-                partial_variables={"format_instructions": output_parser.get_format_instructions()},
-            )
-            final_chain = output_prompt | llm | output_parser
-            answer = final_chain.invoke({"output": output})
-            return jsonify(answer)
-        except:
-            pass
+    try:
+        output_parser = JsonOutputParser(pydantic_object=Travel)
+        output_prompt = PromptTemplate(
+            template="Think and extract as instructed in JSON format\n{format_instructions}\n{output}\n",
+            input_variables=["output"],
+            partial_variables={"format_instructions": output_parser.get_format_instructions()},
+        )
+        final_chain = output_prompt | llm | output_parser
+        answer = final_chain.invoke({"output": output})
+        return jsonify(answer)
+    except:
+        pass
 
 
 @app.route('/', methods=['POST'])
