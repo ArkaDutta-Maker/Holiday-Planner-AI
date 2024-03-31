@@ -14,9 +14,10 @@ from langchain_core.prompts import PromptTemplate
 from langchain.prompts import ChatPromptTemplate
 from langchain.schema.output_parser import StrOutputParser
 from langchain_core.output_parsers import JsonOutputParser
+from flask_cors import CORS
 
 app = Flask(__name__)
-
+cors = CORS(app, origins="*")
 class Travel(BaseModel):
     Sl_No: int = Field(description="Serial Number of the cities")
     City: str = Field(description="List of cities to visit")
