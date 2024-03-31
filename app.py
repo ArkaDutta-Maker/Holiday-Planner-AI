@@ -36,7 +36,6 @@ def main(location, distance, crowd, days):
     chain = prompt | llm | StrOutputParser()
 
     output = chain.invoke({"location": location, "distance": distance, "crowd": crowd, "days": days})
-    answer = []
     try:
         output_parser = JsonOutputParser(pydantic_object=Travel)
         output_prompt = PromptTemplate(
@@ -48,7 +47,7 @@ def main(location, distance, crowd, days):
         answer = final_chain.invoke({"output": output})
         return jsonify(answer)
     except:
-        pass
+        return jsonify("Error in processing the data":404)
 
 
 @app.route('/', methods=['POST'])
