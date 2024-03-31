@@ -59,5 +59,5 @@ def home():
     return main(data['location'], data['distance'], data['crowd'], data['days'])
     
 
-if __name__ == '__main__':
-    app.run(debug=True, port=5000)
+# if __name__ == '__main__':
+#     app.run()
