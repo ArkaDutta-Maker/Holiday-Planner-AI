@@ -10,6 +10,7 @@ click==8.1.7
 colorama==0.4.6
 dataclasses-json==0.6.4
 Flask==3.0.2
+Flask-Cors==4.0.0
 frozenlist==1.4.1
 google-ai-generativelanguage==0.4.0
 google-api-core==2.18.0
