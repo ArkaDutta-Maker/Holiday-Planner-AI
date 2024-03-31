@@ -17,9 +17,6 @@ from langchain_core.output_parsers import JsonOutputParser
 
 app = Flask(__name__)
 
-import os
-os.environ['GOOGLE_API_KEY'] = 'AIzaSyCQ5FJ29LRieGENvedg_UeQpQNXwcWx5Kk'
-
 class Travel(BaseModel):
     Sl_No: int = Field(description="Serial Number of the cities")
     City: str = Field(description="List of cities to visit")
