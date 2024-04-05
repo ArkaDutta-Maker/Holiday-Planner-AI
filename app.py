@@ -36,18 +36,19 @@ def main(location, distance, crowd, days):
     chain = prompt | llm | StrOutputParser()
 
     output = chain.invoke({"location": location, "distance": distance, "crowd": crowd, "days": days})
-    try:
-        output_parser = JsonOutputParser(pydantic_object=Travel)
-        output_prompt = PromptTemplate(
-            template="Think and extract as instructed in JSON format\n{format_instructions}\n{output}\n",
-            input_variables=["output"],
-            partial_variables={"format_instructions": output_parser.get_format_instructions()},
-        )
-        final_chain = output_prompt | llm | output_parser
-        answer = final_chain.invoke({"output": output})
-        return jsonify(answer)
-    except:
-        return "Error in processing the data"
+    while(True):
+        try:
+            output_parser = JsonOutputParser(pydantic_object=Travel)
+            output_prompt = PromptTemplate(
+                template="Think and extract as instructed in JSON format\n{format_instructions}\n{output}\n",
+                input_variables=["output"],
+                partial_variables={"format_instructions": output_parser.get_format_instructions()},
+            )
+            final_chain = output_prompt | llm | output_parser
+            answer = final_chain.invoke({"output": output})
+            return jsonify(answer)
+        except:
+            pass
 
 
 @app.route('/recommend', methods=['POST'])
